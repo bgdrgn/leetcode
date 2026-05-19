@@ -1,10 +1,13 @@
-bool canFind(int** prerequisites, int prerequisitesRowSize, int pos, bool *isfinding, bool *canfind) {
+#include <stdbool.h>
+#include <strings.h>
+
+bool canFind(int **prerequisites, int prerequisitesRowSize, int pos, bool *isfinding, bool *canfind) {
     if (canfind[pos]) {
         return true;
     }
     isfinding[pos] = true;
     int i;
-    for (i = 0 ; i < prerequisitesRowSize ; i++) {
+    for (i = 0; i < prerequisitesRowSize; i++) {
         if (prerequisites[i][0] == pos) {
             int pre = prerequisites[i][1];
             if (isfinding[pre]) {
@@ -20,12 +23,13 @@ bool canFind(int** prerequisites, int prerequisitesRowSize, int pos, bool *isfin
     isfinding[pos] = false;
     return true;
 }
-bool canFinish(int numCourses, int** prerequisites, int prerequisitesRowSize, int prerequisitesColSize) {
+
+bool canFinish(int numCourses, int **prerequisites, int prerequisitesRowSize, int prerequisitesColSize) {
     bool isfinding[numCourses], canfind[numCourses];
     memset(isfinding, false, sizeof(bool) * numCourses); // whether is finding
     memset(canfind, false, sizeof(bool) * numCourses);   // whether the sourse can be started
     int i;
-    for (i = 0 ; i < numCourses ; i++) {
+    for (i = 0; i < numCourses; i++) {
         if (!canFind(prerequisites, prerequisitesRowSize, i, isfinding, canfind)) {
             return false;
         }

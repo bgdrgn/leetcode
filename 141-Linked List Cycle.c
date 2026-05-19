@@ -1,3 +1,7 @@
+#include <stdbool.h>
+#include <stddef.h>
+#include "ds.h"
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

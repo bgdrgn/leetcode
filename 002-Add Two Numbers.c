@@ -1,3 +1,7 @@
+#include <stddef.h>
+#include <stdlib.h>
+#include "ds.h"
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -5,7 +9,7 @@
  *     struct ListNode *next;
  * };
  */
-int add(struct ListNode* l1, struct ListNode* l2, int* carry) {
+int add(struct ListNode *l1, struct ListNode *l2, int *carry) {
     int val = ((l1 != NULL) ? l1->val : 0) + ((l2 != NULL) ? l2->val : 0) + *carry;
     if (val > 9) {
         *carry = 1;
@@ -15,12 +19,13 @@ int add(struct ListNode* l1, struct ListNode* l2, int* carry) {
     }
     return val;
 }
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
-    struct ListNode* cur = malloc(sizeof(struct ListNode));
-    struct ListNode* head = NULL;
+
+struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) {
+    struct ListNode *cur = malloc(sizeof(struct ListNode));
+    struct ListNode *head = NULL;
     int carry = 0;
     while (l1 != NULL || l2 != NULL || carry != 0) {
-        struct ListNode* tmp = malloc(sizeof(struct ListNode));
+        struct ListNode *tmp = malloc(sizeof(struct ListNode));
         tmp->next = NULL;
         tmp->val = add(l1, l2, &carry);
         if (head == NULL) {

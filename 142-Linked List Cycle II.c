@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include "ds.h"
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -9,8 +12,8 @@ struct ListNode *detectCycle(struct ListNode *head) {
     if (head == NULL) {
         return NULL;
     }
-    struct ListNode * slowNode = head;
-    struct ListNode * fastNode = head;
+    struct ListNode *slowNode = head;
+    struct ListNode *fastNode = head;
     while (fastNode != NULL) {
         slowNode = slowNode->next;
         fastNode = fastNode->next != NULL ? fastNode->next->next : NULL;

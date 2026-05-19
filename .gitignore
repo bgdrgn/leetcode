@@ -30,3 +30,54 @@
 
 # Debug files
 *.dSYM/
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+allure-results/
+
+### CLion ###
+cmake-build-*/
+
+### CMake 自动生成文件 ###
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Testing
+
+### 可执行文件/编译产物 ###
+*.o
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+

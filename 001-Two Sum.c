@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <stdlib.h>
+
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
@@ -8,21 +11,21 @@ typedef struct HashNode {
 
 typedef struct HashMap {
     int size;
-    HashNode** storage;
+    HashNode **storage;
 } HashMap;
 
-HashMap * hash_create(int size){
-    HashMap * hashMap = malloc(sizeof(HashMap));
+HashMap *hash_create(int size) {
+    HashMap *hashMap = malloc(sizeof(HashMap));
     hashMap->size = size;
-    hashMap->storage = calloc(size, sizeof(HashNode*));
+    hashMap->storage = calloc(size, sizeof(HashNode *));
     return hashMap;
 }
 
-void hash_destroy(HashMap * hashMap) {
-	int i;
-    for(i = 0 ; i < hashMap->size ; i++) {
-        HashNode * node;
-        if((node = hashMap->storage[i])) {
+void hash_destroy(HashMap *hashMap) {
+    int i;
+    for (i = 0; i < hashMap->size; i++) {
+        HashNode *node;
+        if ((node = hashMap->storage[i])) {
             free(node);
         }
     }
@@ -30,9 +33,9 @@ void hash_destroy(HashMap * hashMap) {
     free(hashMap);
 }
 
-void hash_set(HashMap * hashMap, int key, int value) {
+void hash_set(HashMap *hashMap, int key, int value) {
     int hash = abs(key) % hashMap->size;
-    HashNode * node;
+    HashNode *node;
     while ((node = hashMap->storage[hash])) {
         if (hash < hashMap->size - 1) {
             hash++;
@@ -46,9 +49,9 @@ void hash_set(HashMap * hashMap, int key, int value) {
     hashMap->storage[hash] = node;
 }
 
-HashNode* hash_get(HashMap * hashMap, int key) {
+HashNode *hash_get(HashMap *hashMap, int key) {
     int hash = abs(key) % hashMap->size;
-    HashNode* node;
+    HashNode *node;
     while ((node = hashMap->storage[hash])) {
         if (node->key == key) {
             return node;
@@ -63,19 +66,20 @@ HashNode* hash_get(HashMap * hashMap, int key) {
 
     return NULL;
 }
-int* twoSum(int* nums, int numsSize, int target) {
-	HashMap * hashMap = hash_create(numsSize * 2);
-	int * res = malloc(sizeof(int) * 2);
+
+int *twoSum(int *nums, int numsSize, int target) {
+    HashMap *hashMap = hash_create(numsSize * 2);
+    int *res = malloc(sizeof(int) * 2);
     int i, j;
-    for (i = 0 ; i < numsSize ; i++) {
+    for (i = 0; i < numsSize; i++) {
         int num2 = target - nums[i];
-        HashNode * node = hash_get(hashMap, num2);
+        HashNode *node = hash_get(hashMap, num2);
         if (node != NULL) {
-        	res[0] = node->val + 1;
+            res[0] = node->val + 1;
             res[1] = i + 1;
-		} else {
-			hash_set(hashMap, nums[i], i);
-		}
+        } else {
+            hash_set(hashMap, nums[i], i);
+        }
     }
     return res;
 }
